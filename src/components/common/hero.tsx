@@ -44,7 +44,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-primary/20 pt-16 pb-20 lg:pt-24 lg:pb-32">
+    <section className="relative overflow-hidden bg-primary/20 pt-16 pb-20 lg:pt-24 lg:pb-32">  
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]" />
@@ -63,7 +63,7 @@ const Hero = () => {
             
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1]">
               Everything You Need, <br />
-              <span className="text-primary bg-clip-text">All in One Place.</span>
+              <span className="text-gradient bg-clip-text">All in One Place.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
