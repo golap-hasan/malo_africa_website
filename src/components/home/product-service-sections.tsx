@@ -12,8 +12,9 @@ import {
 } from "lucide-react";
 import PageLayout from "@/tools/PageLayout";
 import { Button } from "../ui/button";
+import { StarRating } from "@/tools/StarRating";
 
-interface Product {
+export interface Product {
   id: string;
   image: string;
   brand: string;
@@ -21,7 +22,7 @@ interface Product {
   priceRange: string;
 }
 
-interface Service {
+export interface Service {
   id: string;
   image: string;
   category: string;
@@ -32,7 +33,7 @@ interface Service {
   priceRange: string;
 }
 
-const products: Product[] = [
+export const products: Product[] = [
   {
     id: "1",
     image:
@@ -57,15 +58,37 @@ const products: Product[] = [
     title: "Sony WH-1000XM4 Headphones",
     priceRange: "ZMW 6,000-8,000",
   },
+  {
+    id: "4",
+    image:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
+    brand: "Nike",
+    title: "Nike Air Max Pulse - Sport Edition",
+    priceRange: "ZMW 2,200-3,500",
+  },
+{
+    id: "5",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30", // ঘড়ির অল্টারনেটিভ
+    brand: "Rolex",
+    title: "Submariner Date Oyster Classic",
+    priceRange: "ZMW 15,000-25,000",
+  },
+  {
+    id: "6",
+    image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f", // ক্লোথিং অল্টারনেটিভ
+    brand: "Chitenge",
+    title: "Handmade African Print Suit",
+    priceRange: "ZMW 850-1,200",
+  },
 ];
 
-const services: Service[] = [
+export const services: Service[] = [
   {
     id: "1",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80",
     category: "Marketing",
-    rating: 0.0,
+    rating: 4.8,
     reviews: 31,
     title: "Helping businesses turn online marketing into real in-store sales.",
     location: "Lusaka",
@@ -76,15 +99,59 @@ const services: Service[] = [
     image:
       "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&q=80",
     category: "Media and Marketing",
-    rating: 0.0,
+    rating: 4.5,
     reviews: 13,
     title: "Advertising consultation, branding and promotions.",
     location: "Lusaka",
     priceRange: "ZMW 500-4,000",
   },
+  {
+    id: "3",
+    image:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&q=80",
+    category: "IT Support",
+    rating: 5.0,
+    reviews: 24,
+    title: "Web development and software maintenance services.",
+    location: "Kitwe",
+    priceRange: "ZMW 3,000-10,000",
+  },
+  {
+    id: "4",
+    image:
+      "https://images.unsplash.com/photo-1591343395082-e120087004b4?w=500&q=80",
+    category: "Photography",
+    rating: 4.9,
+    reviews: 45,
+    title: "Professional wedding and event photography sessions.",
+    location: "Livingstone",
+    priceRange: "ZMW 2,500-8,000",
+  },
+  {
+    id: "5",
+    image:
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500&q=80",
+    category: "Legal",
+    rating: 4.7,
+    reviews: 18,
+    title: "Legal advice and business registration consultancy.",
+    location: "Lusaka",
+    priceRange: "ZMW 1,200-5,000",
+  },
+  {
+    id: "6",
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80",
+    category: "Delivery",
+    rating: 4.2,
+    reviews: 102,
+    title: "Same-day bike delivery across Lusaka metropolitan area.",
+    location: "Lusaka",
+    priceRange: "ZMW 50-250",
+  },
 ];
 
-const ProductCard = ({ product }: { product: Product }) => (
+export const ProductCard = ({ product }: { product: Product }) => (
   <div className="bg-card rounded-3xl overflow-hidden shadow-sm border border-border flex flex-col h-full hover:shadow-md transition-shadow">
     <div className="relative aspect-4/3 w-full">
       <Image
@@ -113,7 +180,7 @@ const ProductCard = ({ product }: { product: Product }) => (
   </div>
 );
 
-const ServiceCard = ({ service }: { service: Service }) => (
+export const ServiceCard = ({ service }: { service: Service }) => (
   <div className="bg-card rounded-3xl overflow-hidden shadow-sm border border-border flex flex-col h-full hover:shadow-md transition-shadow">
     <div className="relative aspect-4/3 w-full">
       <Image
@@ -153,12 +220,13 @@ const ServiceCard = ({ service }: { service: Service }) => (
       </div>
 
       <div className="flex gap-1 mb-1">
-        {[1, 2, 3, 4, 5].map((i) => (
+        {/* {[1, 2, 3, 4, 5].map((i) => (
           <Star key={i} className="h-3 w-3 text-muted-foreground/30" />
-        ))}
+        ))} */}
+        <StarRating size={10} rating={service.rating} totalStars={5} />
       </div>
 
-      <h3 className="font-semibold text-sm line-clamp-2 leading-tight flex-1">
+      <h3 className="font-semibold text-sm line-clamp-2 leading-tight">
         {service.title}
       </h3>
 

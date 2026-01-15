@@ -1,14 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { 
-  Menu, 
-  Search, 
-  Bell, 
-  MapPin, 
-  PlusCircle, 
+import {
+  Menu,
+  Search,
+  Bell,
+  PlusCircle,
+  Plus,
+  FileText,
+  Ticket,
   User,
   Home,
   ShoppingBag,
@@ -17,17 +20,10 @@ import {
   Calendar,
   LogOut,
   Settings,
-  Heart
+  Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Sheet,
   SheetContent,
@@ -49,7 +45,7 @@ import {
 
 const Navbar = () => {
   const pathname = usePathname();
-  
+  const [open, setOpen] = useState(false);
   const navLinks = [
     { name: "Home", href: "/", icon: Home },
     { name: "Products", href: "/products", icon: ShoppingBag },
@@ -57,20 +53,26 @@ const Navbar = () => {
     { name: "News", href: "/news", icon: Newspaper },
     { name: "Events", href: "/events", icon: Calendar },
   ];
-
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="mx-auto flex h-22 container items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Left: Logo & Mobile Menu */}
         <div className="flex items-center gap-4">
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden hover:bg-muted">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden hover:bg-muted"
+              >
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="flex w-[320px] flex-col p-0 border-r text-foreground">
+            <SheetContent
+              side="left"
+              className="flex w-[320px] flex-col p-0 border-r text-foreground"
+            >
               <SheetHeader className="p-6 text-left bg-muted/30 border-b">
                 <SheetTitle className="flex items-center gap-2">
                   {/* <Image
@@ -95,15 +97,20 @@ const Navbar = () => {
                       <Link
                         key={link.name}
                         href={link.href}
+                        onClick={() => setOpen(false)}
                         className={`flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-semibold transition-all group ${
-                          isActive 
-                            ? "text-gradient bg-primary/10 shadow-sm" 
+                          isActive
+                            ? "bg-primary text-primary-foreground shadow-sm"
                             : "text-muted-foreground hover:text-primary hover:bg-primary/5"
                         }`}
                       >
-                        <div className={`p-2 rounded-lg transition-colors ${
-                          isActive ? "bg-gradient text-primary-foreground" : "bg-muted group-hover:bg-primary/10"
-                        }`}>
+                        <div
+                          className={`p-2 rounded-lg transition-colors ${
+                            isActive
+                              ? "bg-primary/90 text-primary-foreground"
+                              : "bg-muted group-hover:bg-primary/10"
+                          }`}
+                        >
                           <link.icon className="h-5 w-5" />
                         </div>
                         {link.name}
@@ -117,18 +124,29 @@ const Navbar = () => {
                     Quick Actions
                   </h3>
                   <div className="space-y-1">
-                    <Link 
-                      href="/favorites" 
+                    <Link
+                      href="/favorites"
+                      onClick={() => setOpen(false)}
                       className={`flex items-center gap-3 py-2 text-sm font-medium transition-colors ${
-                        pathname === "/favorites" ? "text-primary" : "text-muted-foreground hover:text-primary"
+                        pathname === "/favorites"
+                          ? "text-primary"
+                          : "text-muted-foreground hover:text-primary"
                       }`}
                     >
-                      <Heart className={`h-4 w-4 ${pathname === "/favorites" ? "fill-primary" : ""}`} /> Favorites
+                      <Heart
+                        className={`h-4 w-4 ${
+                          pathname === "/favorites" ? "fill-primary" : ""
+                        }`}
+                      />{" "}
+                      Favorites
                     </Link>
-                    <Link 
-                      href="/settings" 
+                    <Link
+                      href="/settings"
+                      onClick={() => setOpen(false)}
                       className={`flex items-center gap-3 py-2 text-sm font-medium transition-colors ${
-                        pathname === "/settings" ? "text-primary" : "text-muted-foreground hover:text-primary"
+                        pathname === "/settings"
+                          ? "text-primary"
+                          : "text-muted-foreground hover:text-primary"
                       }`}
                     >
                       <Settings className="h-4 w-4" /> Settings
@@ -139,8 +157,8 @@ const Navbar = () => {
 
               <div className="p-4 border-t bg-muted/20">
                 <Button className="w-full justify-center gap-2 h-12 rounded-xl font-bold shadow-md active:scale-95 transition-all">
-                  <PlusCircle className="h-5 w-5" />
-                  Post Your Ad
+                  <Plus className="h-5 w-5" />
+                  Create
                 </Button>
                 <div className="mt-4 flex items-center justify-between px-2">
                   <div className="flex items-center gap-2">
@@ -205,19 +223,49 @@ const Navbar = () => {
             />
           </div>
 
-          {/* Location Dropdown */}
+          {/* Create Dropdown */}
           <div className="hidden sm:block">
-            <Select defaultValue="lusaka">
-              <SelectTrigger className="h-10 w-35 rounded-full bg-muted/50 text-xs font-bold focus:ring-2 focus:ring-primary/20">
-                <MapPin className="h-4 w-4 mr-1 text-primary" />
-                <SelectValue placeholder="Location" />
-              </SelectTrigger>
-              <SelectContent className="rounded-xl border-none shadow-xl">
-                <SelectItem value="lusaka">Lusaka</SelectItem>
-                <SelectItem value="kitwe">Kitwe</SelectItem>
-                <SelectItem value="ndola">Ndola</SelectItem>
-              </SelectContent>
-            </Select>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className="rounded-full">
+                  <Plus className="h-5 w-5" />
+                  <span>Create</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2 shadow-xl border-muted/50">
+                <DropdownMenuLabel className="px-3 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                  Post something new
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-muted" />
+                <DropdownMenuItem className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group">
+                  <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
+                    <FileText className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-sm">Create Post</span>
+                    <span className="text-[10px] text-muted-foreground">List a product or service</span>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group">
+                  <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
+                    <Calendar className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-sm">Create Event</span>
+                    <span className="text-[10px] text-muted-foreground">Organize a new event</span>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group">
+                  <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
+                    <Ticket className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-sm">Create Voucher</span>
+                    <span className="text-[10px] text-muted-foreground">Add a discount offer</span>
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Action Icons */}

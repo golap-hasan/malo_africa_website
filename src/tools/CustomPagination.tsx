@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react"
-import { usePathname, useSearchParams } from "next/navigation";
+import * as React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
@@ -14,11 +14,15 @@ import {
 
 type PaginationIdentifier = number | "...";
 
-const getPaginationRange = (totalPages: number, currentPage: number, siblingCount = 1): PaginationIdentifier[] => {
+const getPaginationRange = (
+  totalPages: number,
+  currentPage: number,
+  siblingCount = 1
+): PaginationIdentifier[] => {
   const totalPageNumbers = siblingCount + 5;
 
   if (totalPageNumbers >= totalPages) {
-    return [...Array(totalPages)].map((_, idx) => idx + 1);
+    return Array.from({ length: totalPages }, (_, idx) => idx + 1);
   }
 
   const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
@@ -32,23 +36,24 @@ const getPaginationRange = (totalPages: number, currentPage: number, siblingCoun
 
   if (!shouldShowLeftDots && shouldShowRightDots) {
     const leftItemCount = 3 + 2 * siblingCount;
-    const leftRange = [...Array(leftItemCount)].map((_, i) => i + 1);
+    const leftRange = Array.from({ length: leftItemCount }, (_, i) => i + 1);
     return [...leftRange, "...", totalPages];
   }
 
   if (shouldShowLeftDots && !shouldShowRightDots) {
     const rightItemCount = 3 + 2 * siblingCount;
-    const rightRange = [...Array(rightItemCount)].map(
+    const rightRange = Array.from(
+      { length: rightItemCount },
       (_, i) => totalPages - rightItemCount + i + 1
     );
     return [firstPageIndex, "...", ...rightRange];
   }
 
   if (shouldShowLeftDots && shouldShowRightDots) {
-    const middleRange = [];
-    for (let i = leftSiblingIndex; i <= rightSiblingIndex; i++) {
-      middleRange.push(i);
-    }
+    const middleRange = Array.from(
+      { length: rightSiblingIndex - leftSiblingIndex + 1 },
+      (_, i) => leftSiblingIndex + i
+    );
     return [firstPageIndex, "...", ...middleRange, "...", lastPageIndex];
   }
   return [];
@@ -57,35 +62,58 @@ const getPaginationRange = (totalPages: number, currentPage: number, siblingCoun
 type CustomPaginationProps = {
   currentPage: number;
   totalPages: number;
+  className?: string;
 };
 
 const CustomPagination: React.FC<CustomPaginationProps> = ({
   currentPage,
   totalPages,
+  className,
 }) => {
   const pathname = usePathname();
+  const router = useRouter(); // রাউটার আবার নিয়ে আসলাম
   const searchParams = useSearchParams();
+
+  if (totalPages <= 1) return null;
+
   const paginationRange = getPaginationRange(totalPages, currentPage);
 
-  if (currentPage === 0 || paginationRange.length === 0) {
-    return null;
-  }
-
   const createPageUrl = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
 
+  // 🔥 আসল ফিক্স এখানে
+  const handleNavigate = (pageNumber: number) => (
+    e: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    e.preventDefault(); // ১. পেজ রিলোড বন্ধ করবে
+    const url = createPageUrl(pageNumber);
+    
+    // ২. scroll: false মানে পেজ আর লাফ দিয়ে উপরে যাবে না
+    router.push(url, { scroll: false }); 
+  };
+
   return (
-    <Pagination>
+    <Pagination className={className}>
       <PaginationContent>
+        {/* Previous Button */}
         <PaginationItem>
           <PaginationPrevious
             href={currentPage > 1 ? createPageUrl(currentPage - 1) : "#"}
-            className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+            onClick={currentPage > 1 ? handleNavigate(currentPage - 1) : undefined}
+            aria-disabled={currentPage <= 1}
+            tabIndex={currentPage <= 1 ? -1 : undefined}
+            className={
+              currentPage <= 1
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
+            }
           />
         </PaginationItem>
+
+        {/* Page Numbers */}
         {paginationRange.map((pageNumber, index) => {
           if (pageNumber === "...") {
             return (
@@ -98,18 +126,28 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           return (
             <PaginationItem key={pageNumber}>
               <PaginationLink
-                href={createPageUrl(pageNumber as number)}
+                href={createPageUrl(pageNumber)}
                 isActive={currentPage === pageNumber}
+                onClick={handleNavigate(pageNumber as number)}
               >
                 {pageNumber}
               </PaginationLink>
             </PaginationItem>
           );
         })}
+
+        {/* Next Button */}
         <PaginationItem>
           <PaginationNext
             href={currentPage < totalPages ? createPageUrl(currentPage + 1) : "#"}
-            className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+            onClick={currentPage < totalPages ? handleNavigate(currentPage + 1) : undefined}
+            aria-disabled={currentPage >= totalPages}
+            tabIndex={currentPage >= totalPages ? -1 : undefined}
+            className={
+              currentPage >= totalPages
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
+            }
           />
         </PaginationItem>
       </PaginationContent>

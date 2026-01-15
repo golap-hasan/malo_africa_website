@@ -82,7 +82,6 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2">
             {/* Quick Links Column */}
             <div className="space-y-6">
               <h3 className="text-lg font-bold tracking-tight">Quick Links</h3>
@@ -120,7 +119,6 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-          </div>
 
           {/* Newsletter Column */}
           <div className="space-y-6">
@@ -136,7 +134,7 @@ const Footer = () => {
                   className="pl-10 rounded-xl bg-background border-muted group-focus-within:border-primary transition-all"
                 />
               </div>
-              <Button className="w-full rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all active:scale-95">
+              <Button className="w-full rounded-xl font-bold bg-gradient hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all active:scale-95">
                 Subscribe Now
               </Button>
             </div>

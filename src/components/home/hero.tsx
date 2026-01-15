@@ -3,7 +3,13 @@
 import * as React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Search, MapPin, ArrowRight, ShoppingBag, Sparkles } from "lucide-react";
+import {
+  Search,
+  MapPin,
+  ArrowRight,
+  ShoppingBag,
+  Sparkles,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Carousel,
@@ -30,21 +36,46 @@ const Hero = () => {
 
   const carouselImages = [
     {
-      src: "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1000&auto=format&fit=crop",
-      alt: "Shopping Experience",
+      // ১. ফ্যাশন ও শপিং (Premium Fashion)
+      src: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop",
+      alt: "Premium Shopping Experience",
     },
     {
-      src: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1000&auto=format&fit=crop",
-      alt: "Professional Services",
+      src: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1200&auto=format&fit=crop",
+      alt: "Expert Professional Services",
     },
     {
-      src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1000&auto=format&fit=crop",
-      alt: "Events and News",
+      src: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=1200&auto=format&fit=crop",
+      alt: "Reliable Logistics and Delivery",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop",
+      alt: "Innovative Technology Solutions",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop",
+      alt: "Luxury Accessories Collection",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+      alt: "Marketing and Branding Growth",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1200&auto=format&fit=crop",
+      alt: "Smart Gadgets and Electronics",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1512418490979-92798cec1380?q=80&w=1200&auto=format&fit=crop",
+      alt: "Handcrafted Unique Products",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop",
+      alt: "Empowering Your Business Journey",
     },
   ];
 
   return (
-    <section className="relative overflow-hidden bg-primary/20 pt-16 pb-20 lg:pt-24 lg:pb-32">  
+    <section className="relative overflow-hidden bg-primary/20 pt-16 pb-20 lg:pt-24 lg:pb-32">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]" />
@@ -53,29 +84,31 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-          
           {/* Left Content */}
           <div className="flex-1 text-center lg:text-left space-y-8 max-w-2xl mx-auto lg:mx-0">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold animate-fade-in">
               <Sparkles className="h-4 w-4" />
               <span>Zambia&apos;s #1 Marketplace & Service Hub</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1]">
               Everything You Need, <br />
-              <span className="text-gradient bg-clip-text">All in One Place.</span>
+              <span className="text-gradient bg-clip-text">
+                All in One Place.
+              </span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Discover local products, professional services, latest news, and upcoming events in your community.
+              Discover local products, professional services, latest news, and
+              upcoming events in your community.
             </p>
 
             {/* Search Bar - Desktop Style */}
             <div className="hidden md:flex items-center gap-2 p-2 bg-card border rounded-2xl shadow-xl shadow-primary/5 max-w-xl">
               <div className="flex-1 flex items-center px-3 gap-2 border-r">
                 <Search className="h-5 w-5 text-muted-foreground" />
-                <Input 
-                  placeholder="What are you looking for?" 
+                <Input
+                  placeholder="What are you looking for?"
                   className="border-none focus-visible:ring-0 text-base bg-transparent h-12"
                 />
               </div>
@@ -83,7 +116,10 @@ const Hero = () => {
                 <MapPin className="h-5 w-5 text-primary" />
                 <span className="text-sm font-semibold">All Zambia</span>
               </div>
-              <Button size="lg" className="rounded-xl px-8 font-bold h-12 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all">
+              <Button
+                size="lg"
+                className="rounded-xl px-8 font-bold h-12 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
+              >
                 Search
               </Button>
             </div>
@@ -125,7 +161,7 @@ const Hero = () => {
           {/* Right Content - Carousel Visual */}
           <div className="flex-1 relative w-full max-w-150 lg:max-w-none">
             <div className="relative z-10 animate-float">
-              <Carousel 
+              <Carousel
                 setApi={setApi}
                 plugins={[
                   Autoplay({
@@ -147,13 +183,15 @@ const Hero = () => {
                         <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
                         <div className="absolute bottom-8 left-8 text-white">
                           <p className="text-lg font-bold">{image.alt}</p>
-                          <p className="text-sm opacity-80">Explore the best of Zambia</p>
+                          <p className="text-sm opacity-80">
+                            Explore the best of Zambia
+                          </p>
                         </div>
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                
+
                 {/* Indicators */}
                 <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
                   {carouselImages.map((_, index) => (
@@ -162,8 +200,8 @@ const Hero = () => {
                       onClick={() => api?.scrollTo(index)}
                       className={cn(
                         "h-2 rounded-full transition-all duration-300",
-                        current === index 
-                          ? "w-8 bg-primary shadow-lg shadow-primary/20" 
+                        current === index
+                          ? "w-8 bg-primary shadow-lg shadow-primary/20"
                           : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                       )}
                       aria-label={`Go to slide ${index + 1}`}
@@ -171,7 +209,7 @@ const Hero = () => {
                   ))}
                 </div>
               </Carousel>
-              
+
               {/* Floating Cards */}
               <div className="absolute -top-6 -right-6 md:-right-10 p-4 bg-card rounded-2xl shadow-xl border animate-bounce-slow hidden sm:block z-20">
                 <div className="flex items-center gap-3">
@@ -179,7 +217,9 @@ const Hero = () => {
                     <Sparkles className="h-5 w-5 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-muted-foreground">New Items</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      New Items
+                    </p>
                     <p className="text-sm font-black">+1,200 Today</p>
                   </div>
                 </div>
@@ -191,17 +231,18 @@ const Hero = () => {
                     <MapPin className="h-5 w-5 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-muted-foreground">Location</p>
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Location
+                    </p>
                     <p className="text-sm font-black">All Across Zambia</p>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Background Blob for Carousel */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/5 rounded-full -z-10 blur-[60px]" />
           </div>
-
         </div>
       </div>
     </section>
