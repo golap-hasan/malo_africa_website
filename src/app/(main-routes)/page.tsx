@@ -1,13 +1,14 @@
 
-import Hero from "@/components/common/hero";
-import NavCategories from "@/components/common/nav-categories";
+import Hero from "@/components/home/hero";
+import NavCategories from "@/components/home/nav-categories";
+import ProductServiceSections from "@/components/home/product-service-sections";
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <NavCategories />
-      {/* Other sections will go here */}
+      <ProductServiceSections />
     </main>
   );
 }

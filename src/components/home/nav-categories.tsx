@@ -101,7 +101,7 @@ const NavCategories = () => {
               )}>
                 <cat.icon className="h-7 w-7" />
               </div>
-              <span className="text-xs text-center leading-tight transition-colors uppercase tracking-tight">
+              <span className="text-xs text-center leading-tight transition-colors uppercase tracking-wide">
                 {cat.name}
               </span>
             </Link>
