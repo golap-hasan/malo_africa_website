@@ -29,7 +29,7 @@ const LeftFilter = () => {
   } = useSmartFilter();
 
   const rawMode = getFilter("mode");
-  const mode = rawMode || "buying";
+  const mode = rawMode || "all";
   const minPriceParam = Number(getFilter("min_price")) || 0;
   const maxPriceParam = Number(getFilter("max_price")) || 100000;
 
@@ -37,7 +37,7 @@ const LeftFilter = () => {
 
   useEffect(() => {
     if (!rawMode) {
-      updateFilter("mode", "buying");
+      updateFilter("mode", "all",);
     }
   }, [rawMode, updateFilter]);
 
