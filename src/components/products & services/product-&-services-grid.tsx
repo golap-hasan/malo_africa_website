@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   ProductCard,
   products,
@@ -9,7 +10,7 @@ import {
 import CustomPagination from "@/tools/CustomPagination";
 import { usePathname } from "next/navigation";
 
-const ProductAndServicesGrid = ({currentPage}: {currentPage: number}) => {
+const ProductAndServicesGrid = ({ currentPage }: { currentPage: number }) => {
   // const searchParams = useSearchParams();
   // const currentPage = Number(searchParams.get("page")) || 1;
   const totalPages = 7;
@@ -32,10 +33,22 @@ const ProductAndServicesGrid = ({currentPage}: {currentPage: number}) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {isServicesPage
           ? services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+              <Link
+                key={service.id}
+                href={`/services/${service.id}`}
+                className="block"
+              >
+                <ServiceCard service={service} />
+              </Link>
             ))
           : products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <Link
+                key={product.id}
+                href={`/products/${product.id}`}
+                className="block"
+              >
+                <ProductCard product={product} />
+              </Link>
             ))}
       </div>
 
