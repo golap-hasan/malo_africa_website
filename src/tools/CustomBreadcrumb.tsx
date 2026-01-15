@@ -22,7 +22,7 @@ type CustomBreadcrumbProps = {
 
 const CustomBreadcrumb: React.FC<CustomBreadcrumbProps> = ({ links }) => { 
   return (
-    <Breadcrumb className="hidden md:block mb-4">
+    <Breadcrumb className="hidden md:block mb-4 container mx-auto px-5 pt-3">
       <BreadcrumbList>
         {links.map((link, index) => (
           <React.Fragment key={index}>
