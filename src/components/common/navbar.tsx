@@ -55,8 +55,7 @@ const Navbar = () => {
   ];
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="mx-auto flex h-22 container items-center justify-between px-4 sm:px-6 lg:px-8">
-        
+      <div className="mx-auto flex h-22 container items-center justify-between px-5">
         {/* Left: Logo & Mobile Menu */}
         <div className="flex items-center gap-4">
           <Sheet open={open} onOpenChange={setOpen}>
@@ -83,8 +82,12 @@ const Navbar = () => {
                      className="h-14 w-auto object-contain dark:invert"
                    /> */}
                   <div className="flex flex-col">
-                    <span className="text-lg font-bold leading-none text-primary">Malo Africa</span>
-                    <span className="text-xs text-muted-foreground mt-1">Marketplace & More</span>
+                    <span className="text-lg font-bold leading-none text-primary">
+                      Malo Africa
+                    </span>
+                    <span className="text-xs text-muted-foreground mt-1">
+                      Marketplace & More
+                    </span>
                   </div>
                 </SheetTitle>
               </SheetHeader>
@@ -169,7 +172,11 @@ const Navbar = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <ThemeToggle />
-                    <Button variant="ghost" size="sm" className="text-xs font-bold text-muted-foreground hover:text-destructive">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-xs font-bold text-muted-foreground hover:text-destructive"
+                    >
                       <LogOut className="h-4 w-4 mr-1" /> Login
                     </Button>
                   </div>
@@ -199,13 +206,17 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className={`text-sm font-semibold transition-colors relative group py-2 ${
-                  isActive ? "text-primary" : "text-muted-foreground hover:text-primary"
+                  isActive
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-primary"
                 }`}
               >
                 {link.name}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-primary transition-all ${
-                  isActive ? "w-full" : "w-0 group-hover:w-full"
-                }`}></span>
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 bg-primary transition-all ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                ></span>
               </Link>
             );
           })}
@@ -213,12 +224,11 @@ const Navbar = () => {
 
         {/* Right: Search, Location, Actions */}
         <div className="flex items-center gap-2 sm:gap-4">
-          
           {/* Desktop Search Bar */}
           <div className="hidden md:flex relative w-48 lg:w-64">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input 
-              placeholder="Search..." 
+            <Input
+              placeholder="Search..."
               className="pl-10 pr-4 rounded-full bg-muted/50 focus-visible:ring-2 focus-visible:ring-primary/20 transition-all"
             />
           </div>
@@ -232,37 +242,72 @@ const Navbar = () => {
                   <span>Create</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2 shadow-xl border-muted/50">
+              <DropdownMenuContent
+                align="end"
+                className="w-56 rounded-2xl p-2 shadow-xl border-muted/50"
+              >
                 <DropdownMenuLabel className="px-3 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                   Post something new
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-muted" />
-                <DropdownMenuItem className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group">
-                  <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
-                    <FileText className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-sm">Create Post</span>
-                    <span className="text-[10px] text-muted-foreground">List a product or service</span>
-                  </div>
+                <DropdownMenuItem
+                  asChild
+                  className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group"
+                >
+                  <Link
+                    href="/create/post"
+                    className="flex items-center w-full"
+                  >
+                    <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
+                      <FileText className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-sm">Create Post</span>
+                      <span className="text-[10px] text-muted-foreground">
+                        List a product or service
+                      </span>
+                    </div>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group">
-                  <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
-                    <Calendar className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-sm">Create Event</span>
-                    <span className="text-[10px] text-muted-foreground">Organize a new event</span>
-                  </div>
+
+                <DropdownMenuItem
+                  asChild
+                  className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group"
+                >
+                  <Link
+                    href="/create/event"
+                    className="flex items-center w-full"
+                  >
+                    <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
+                      <Calendar className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-sm">Create Event</span>
+                      <span className="text-[10px] text-muted-foreground">
+                        Organize a new event
+                      </span>
+                    </div>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group">
-                  <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
-                    <Ticket className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-sm">Create Voucher</span>
-                    <span className="text-[10px] text-muted-foreground">Add a discount offer</span>
-                  </div>
+
+                <DropdownMenuItem
+                  asChild
+                  className="rounded-xl px-3 py-3 cursor-pointer focus:bg-primary/10 group"
+                >
+                  <Link
+                    href="/create/voucher"
+                    className="flex items-center w-full"
+                  >
+                    <div className="bg-primary/10 p-2 rounded-lg mr-3 group-focus:bg-primary/20 transition-colors">
+                      <Ticket className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-sm">Create Voucher</span>
+                      <span className="text-[10px] text-muted-foreground">
+                        Add a discount offer
+                      </span>
+                    </div>
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -271,23 +316,40 @@ const Navbar = () => {
           {/* Action Icons */}
           <div className="flex items-center gap-1 sm:gap-2">
             <ThemeToggle />
-            <Button variant="ghost" size="icon" className="md:hidden rounded-full hover:bg-muted">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden rounded-full hover:bg-muted"
+            >
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="relative rounded-full hover:bg-muted group">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative rounded-full hover:bg-muted group"
+            >
               <Bell className="h-5 w-5 transition-transform group-hover:rotate-12" />
               <span className="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-destructive border-2 border-background animate-pulse"></span>
             </Button>
-            
+
             <div className="hidden sm:block">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted relative">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-full hover:bg-muted relative"
+                  >
                     <User className="h-5 w-5 text-primary" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 rounded-xl border-none shadow-xl">
-                  <DropdownMenuLabel className="font-bold">My Account</DropdownMenuLabel>
+                <DropdownMenuContent
+                  align="end"
+                  className="w-56 rounded-xl border-none shadow-xl"
+                >
+                  <DropdownMenuLabel className="font-bold">
+                    My Account
+                  </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="cursor-pointer rounded-lg">
                     <User className="mr-2 h-4 w-4" /> Profile
@@ -309,7 +371,11 @@ const Navbar = () => {
               </DropdownMenu>
             </div>
 
-            <Button variant="ghost" size="icon" className="sm:hidden text-primary rounded-full hover:bg-primary/5">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="sm:hidden text-primary rounded-full hover:bg-primary/5"
+            >
               <User className="h-6 w-6" />
             </Button>
           </div>
