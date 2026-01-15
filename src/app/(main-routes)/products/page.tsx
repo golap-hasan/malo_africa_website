@@ -2,8 +2,16 @@ import LeftFilter from "@/components/products/left-filter";
 import ProductAndServicesGrid from "@/components/products/product-&-services-grid";
 import TopFilter from "@/components/products/top-filter";
 import PageLayout from "@/tools/PageLayout";
+import { SearchParams } from "@/types/global.type";
+// import { Suspense } from "react";
 
-const ProductsPage = () => {
+const ProductsPage = async ({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) => {
+  const currentPage = Number((await searchParams).page) || 1;
+
   return (
     <PageLayout paddingSize="small">
       <div className="pt-6">
@@ -13,7 +21,7 @@ const ProductsPage = () => {
             <LeftFilter />
           </aside>
           <main className="flex-1 min-w-0">
-            <ProductAndServicesGrid />
+            <ProductAndServicesGrid currentPage={currentPage} />
           </main>
         </div>
       </div>

@@ -1,10 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ShoppingBag,
-  Users,
-} from "lucide-react";
+import { ShoppingBag, Users, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories } from "@/const/categories";
 
@@ -16,7 +13,7 @@ const NavCategories = () => {
         {/* Main Navigation Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mb-12">
           <Link
-            href="/buying"
+            href="/products?mode=buying"
             className="flex-1 bg-gradient text-primary-foreground py-5 px-8 rounded-2xl flex items-center justify-center gap-4 font-black text-xl shadow-lg hover:opacity-90 transition-all active:scale-95 group"
           >
             <div className="p-2 bg-white/20 rounded-xl group-hover:rotate-12 transition-transform">
@@ -25,13 +22,22 @@ const NavCategories = () => {
             Buyers
           </Link>
           <Link
-            href="/selling"
+            href="/products?mode=selling"
             className="flex-1 bg-secondary text-secondary-foreground py-5 px-8 rounded-2xl flex items-center justify-center gap-4 font-black text-xl shadow-lg hover:bg-secondary/80 transition-all active:scale-95 group"
           >
             <div className="p-2 bg-primary/10 rounded-xl group-hover:rotate-12 transition-transform">
               <Users className="h-7 w-7" />
             </div>
             Sellers
+          </Link>
+          <Link
+            href="/services?mode=all"
+            className="flex-1 bg-gradient text-primary-foreground py-5 px-8 rounded-2xl flex items-center justify-center gap-4 font-black text-xl shadow-lg hover:bg-primary/30 transition-all active:scale-95 group"
+          >
+            <div className="p-2 bg-primary/10 rounded-xl group-hover:rotate-12 transition-transform">
+              <Briefcase className="h-7 w-7" />
+            </div>
+            Services
           </Link>
         </div>
 
@@ -40,7 +46,7 @@ const NavCategories = () => {
           {categories.map((cat) => (
             <Link
               key={cat.name}
-              href={cat.href}
+              href={`/products?&category=${cat.href}`}
               className="group flex flex-col items-center gap-3 p-2 rounded-2xl hover:bg-accent hover:text-accent-foreground transition-all duration-300 w-25 sm:w-30"
             >
               <div

@@ -33,7 +33,7 @@ const TopFilter = () => {
             updateFilter("location", val === "all" ? null : val)
           }
         >
-          <SelectTrigger className="md:w-50 h-12 rounded-full bg-muted/30 border-none focus:ring-2 focus:ring-primary/20 px-4">
+          <SelectTrigger className="md:w-fit h-12 rounded-full">
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-primary shrink-0" />
               <SelectValue placeholder="Location" />

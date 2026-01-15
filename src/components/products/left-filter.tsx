@@ -60,7 +60,7 @@ const LeftFilter = () => {
           <h3 className="text-sm font-bold">Refine Results</h3>
         </div>
         <Button
-          onClick={() => clearAll(["mode"])}
+          onClick={() => clearAll()}
           variant="ghost"
           size="sm"
           className="h-7 px-2 text-xs text-primary"

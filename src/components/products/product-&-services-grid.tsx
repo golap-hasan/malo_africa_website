@@ -7,11 +7,11 @@ import {
   services,
 } from "../home/product-service-sections";
 import CustomPagination from "@/tools/CustomPagination";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-const ProductAndServicesGrid = () => {
-  const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
+const ProductAndServicesGrid = ({currentPage}: {currentPage: number}) => {
+  // const searchParams = useSearchParams();
+  // const currentPage = Number(searchParams.get("page")) || 1;
   const totalPages = 7;
   const pathname = usePathname();
   const isServicesPage = pathname?.startsWith("/services");
