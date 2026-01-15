@@ -2,7 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ThumbsUp, Star, MapPin, ShoppingBag, Briefcase, ArrowRight } from "lucide-react";
+import {
+  ThumbsUp,
+  Star,
+  MapPin,
+  ShoppingBag,
+  Briefcase,
+  ArrowRight,
+} from "lucide-react";
 import PageLayout from "@/tools/PageLayout";
 import { Button } from "../ui/button";
 
@@ -169,18 +176,20 @@ const ServiceCard = ({ service }: { service: Service }) => (
 
 export default function ProductServiceSections() {
   return (
-    <div className="space-y-16">
+    <div className="space-y-16 pb-20">
       {/* Products Section */}
-      <div className="bg-primary/10 py-12 md:py-18">
+      <div className="bg-primary/10 py-12 md:py-18 px-5">
         <PageLayout paddingSize="none">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
-              <div className="bg-primary p-2.5 rounded-2xl shadow-lg shadow-primary/20">
+              <div className="bg-primary p-2.5 rounded-2xl shadow-lg shadow-primary/20 hidden sm:block">
                 <ShoppingBag className="h-6 w-6 text-primary-foreground" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold tracking-tight">Products</h2>
-                <p className="text-xs text-muted-foreground font-medium">Explore our premium products</p>
+                <p className="text-xs text-muted-foreground font-medium">
+                  Explore our premium products
+                </p>
               </div>
             </div>
             <Button variant="link" size="sm" asChild>
@@ -200,31 +209,35 @@ export default function ProductServiceSections() {
       </div>
 
       {/* Services Section */}
-      <PageLayout paddingSize="none">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <div className="bg-secondary p-2.5 rounded-2xl shadow-lg shadow-secondary/20">
-              <Briefcase className="h-6 w-6 text-secondary-foreground" />
+      <div className="px-5">
+        <PageLayout paddingSize="none">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="bg-secondary p-2.5 rounded-2xl shadow-lg shadow-secondary/20 hidden sm:block">
+                <Briefcase className="h-6 w-6 text-secondary-foreground" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight">Services</h2>
+                <p className="text-xs text-muted-foreground font-medium">
+                  Professional services for you
+                </p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight">Services</h2>
-              <p className="text-xs text-muted-foreground font-medium">Professional services for you</p>
-            </div>
+            <Button variant="link" size="sm" asChild>
+              <Link href="/services" className="flex items-center gap-1">
+                View More
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
-          <Button variant="link" size="sm" asChild>
-            <Link href="/services" className="flex items-center gap-1">
-              View More
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-          {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
-      </PageLayout>
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {services.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        </PageLayout>
+      </div>
     </div>
   );
 }
