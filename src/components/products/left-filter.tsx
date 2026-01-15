@@ -28,11 +28,18 @@ const LeftFilter = () => {
     clearAll,
   } = useSmartFilter();
 
-  const mode = getFilter("mode") || "buying";
+  const rawMode = getFilter("mode");
+  const mode = rawMode || "buying";
   const minPriceParam = Number(getFilter("min_price")) || 0;
   const maxPriceParam = Number(getFilter("max_price")) || 100000;
 
   const [priceRange, setPriceRange] = useState([minPriceParam, maxPriceParam]);
+
+  useEffect(() => {
+    if (!rawMode) {
+      updateFilter("mode", "buying");
+    }
+  }, [rawMode, updateFilter]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
