@@ -23,6 +23,7 @@ export const navLinks = [
   { name: "News", href: "/news", icon: Newspaper },
   { name: "Events", href: "/events", icon: Calendar },
   { name: "Help & FAQ", href: "/faq", icon: HelpCircle },
+  { name: "Contact Us", href: "/contact", icon: MessageSquare },
 ];
 
 export const userMenuItems = [
