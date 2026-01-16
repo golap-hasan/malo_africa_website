@@ -10,14 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { navLinks, userMenuItems } from "./nav-config";
+import { dropdownMenuItems } from "./nav-config";
 
 export const UserMenu = () => {
-  // Filter out items that are already in navLinks
-  const filteredUserMenuItems = userMenuItems.filter(
-    (item) => !navLinks.some((navLink) => navLink.href === item.href)
-  );
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -48,7 +43,7 @@ export const UserMenu = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-1">
-          {filteredUserMenuItems.map((item) => (
+          {dropdownMenuItems.map((item) => (
             <DropdownMenuItem
               key={item.name}
               asChild
