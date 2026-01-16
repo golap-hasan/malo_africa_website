@@ -22,7 +22,7 @@ export const navLinks = [
   { name: "Services", href: "/services", icon: Briefcase },
   { name: "News", href: "/news", icon: Newspaper },
   { name: "Events", href: "/events", icon: Calendar },
-  { name: "Help & FAQ", href: "/help", icon: HelpCircle },
+  { name: "Help & FAQ", href: "/faq", icon: HelpCircle },
 ];
 
 export const userMenuItems = [
