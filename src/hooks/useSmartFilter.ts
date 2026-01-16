@@ -98,7 +98,6 @@ export const useSmartFilter = () => {
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   }, [searchParams, pathname, router]);
 
-
   const getFilter = useCallback((key: string) => {
     return searchParams.get(key) || "";
   }, [searchParams]);
@@ -113,6 +112,24 @@ export const useSmartFilter = () => {
     return val ? val.split(",").includes(value) : false;
   }, [searchParams]);
 
+const isFilterActive = useCallback((keys?: string[]) => {
+  if (keys && keys.length > 0) {
+    return keys.some((key) => searchParams.has(key));
+  }
+
+  const allKeys = Array.from(searchParams.keys());
+  return allKeys.some((key) => key !== "page");
+}, [searchParams]);
+
+const getActiveCount = useCallback((keys?: string[]) => {
+  if (keys && keys.length > 0) {
+    return keys.filter((key) => searchParams.has(key)).length;
+  }
+
+  const allKeys = Array.from(searchParams.keys());
+  return allKeys.filter((key) => key !== "page").length;
+}, [searchParams]);
+
   return { 
     updateFilter, 
     updateBatch, 
@@ -120,6 +137,8 @@ export const useSmartFilter = () => {
     clearAll,
     getFilter, 
     getArrayFilter, 
-    isSelected 
+    isSelected,
+    isFilterActive,
+    getActiveCount
   };
 };
