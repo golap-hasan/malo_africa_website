@@ -189,7 +189,7 @@ const EventForm = () => {
             <div className="space-y-2">
               <Label>Location</Label>
               <Select>
-                <SelectTrigger className="pl-10 relative h-11">
+                <SelectTrigger className="pl-10 relative data-[size=default]:h-11">
                    <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <SelectValue placeholder="Select location" />
                 </SelectTrigger>
@@ -216,7 +216,7 @@ const EventForm = () => {
               <div className="space-y-2">
                 <Label>Post Validity</Label>
                 <Select>
-                  <SelectTrigger className="h-11">
+                  <SelectTrigger className="data-[size=default]:h-11">
                     <SelectValue placeholder="Select Duration" />
                   </SelectTrigger>
                   <SelectContent>
