@@ -73,11 +73,11 @@ const VoucherForm = () => {
             
             <div 
               onClick={triggerFileInput}
-              className="border-2 border-dashed border-primary/20 rounded-2xl bg-primary/5 p-10 text-center hover:bg-primary/10 transition-colors cursor-pointer group min-h-75 flex flex-col items-center justify-center relative overflow-hidden"
+              className="border-2 border-dashed border-muted-foreground/30 rounded-2xl bg-muted/5 p-10 text-center hover:bg-muted/10 transition-colors cursor-pointer group min-h-75 flex flex-col items-center justify-center relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-linear-to-tr from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="h-20 w-20 rounded-full bg-background shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10">
-                <UploadCloud className="h-10 w-10 text-primary" />
+                <UploadCloud className="h-10 w-10 text-muted-foreground" />
               </div>
               <h3 className="font-bold text-xl mb-2 text-foreground relative z-10">Click to upload image</h3>
               <p className="text-sm text-muted-foreground max-w-50 mx-auto relative z-10">
@@ -85,36 +85,42 @@ const VoucherForm = () => {
               </p>
             </div>
             
-            {images.length > 0 && (
-              <div className="grid grid-cols-4 gap-3 pt-2">
-                {images.map((img, i) => (
-                  <div key={i} className="relative aspect-square rounded-xl border border-border bg-background overflow-hidden group shadow-sm">
-                    <Image 
-                      src={img} 
-                      alt={`Preview ${i}`} 
-                      fill 
-                      className="object-cover transition-transform group-hover:scale-105"
-                    />
-                    <button 
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeImage(i);
-                      }}
-                      className="absolute top-1 right-1 h-6 w-6 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
+            <div className="grid grid-cols-4 gap-3 pt-4">
+              {Array.from({ length: 4 }).map((_, i) => {
+                const img = images[i];
+                if (img) {
+                  return (
+                    <div key={i} className="relative aspect-square rounded-xl border border-border bg-background overflow-hidden group shadow-sm">
+                      <Image 
+                        src={img} 
+                        alt={`Preview ${i}`} 
+                        fill 
+                        className="object-cover transition-transform group-hover:scale-105"
+                      />
+                      <button 
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeImage(i);
+                        }}
+                        className="absolute top-1 right-1 h-6 w-6 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  );
+                }
+                return (
+                  <div 
+                    key={i}
+                    onClick={triggerFileInput}
+                    className="aspect-square rounded-xl border border-dashed border-muted-foreground/30 bg-background flex items-center justify-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all"
+                  >
+                    <Plus className="h-6 w-6 text-muted-foreground/60" />
                   </div>
-                ))}
-                <div 
-                  onClick={triggerFileInput}
-                  className="aspect-square rounded-xl border-2 border-dashed border-muted-foreground/30 bg-muted/10 flex items-center justify-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all"
-                >
-                  <Plus className="h-6 w-6 text-muted-foreground/70" />
-                </div>
-              </div>
-            )}
+                );
+              })}
+            </div>
           </div>
         </div>
 
