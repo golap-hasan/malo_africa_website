@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, ChevronRight, Clock, MapPin, Ticket } from "lucide-react";
@@ -52,8 +53,9 @@ const EventsPage = () => {
           </div>
 
           <div className="flex flex-col gap-4 rounded-3xl border border-border bg-card/60 p-4 md:p-5 shadow-sm">
-            <EventsFilterBar />
-            
+            <Suspense fallback={<div className="h-20 animate-pulse bg-muted rounded-xl" />}>
+              <EventsFilterBar />
+            </Suspense>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
