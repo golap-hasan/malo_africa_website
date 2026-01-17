@@ -4,7 +4,6 @@ import TopFilter from "@/components/products & services/top-filter";
 import CustomBreadcrumb from "@/tools/CustomBreadcrumb";
 import PageLayout from "@/tools/PageLayout";
 import { SearchParams } from "@/types/global.type";
-// import { Suspense } from "react";
 
 const ProductsPage = async ({
   searchParams,
